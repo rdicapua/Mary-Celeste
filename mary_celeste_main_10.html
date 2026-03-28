@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mary Celeste | Exploring Technology, Science, Art & Human Experience</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 4.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4d96ff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .tagline {
+            font-size: 1.5em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .about-section {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 50px;
+            margin-bottom: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .about-image {
+            flex-shrink: 0;
+            width: 300px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            border: 3px solid rgba(255, 215, 61, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 215, 61, 0.8);
+        }
+
+        .about-content h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ffd93d;
+        }
+
+        .about-content p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .creators-list {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .creator {
+            font-size: 1.2em;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .section {
+            margin-bottom: 60px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .section-header {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section-header h2 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #ffd93d;
+        }
+
+        .section-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .content-card:hover::before {
+            left: 100%;
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .content-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #6bcf7f;
+            line-height: 1.4;
+        }
+
+        .content-card p {
+            font-size: 1.05em;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .content-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+            margin-top: 10px;
+            font-size: 0.95em;
+        }
+
+        .content-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 107, 107, 0.6);
+        }
+
+        .language-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(255, 215, 61, 0.3);
+            border-radius: 10px;
+            font-size: 0.85em;
+            margin-left: 8px;
+            color: #ffd93d;
+            font-weight: bold;
+        }
+
+        .movies-section, .rejections-section {
+            text-align: center;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 40px;
+        }
+
+        .movies-section h2, .rejections-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #ff6b6b;
+        }
+
+        .movie-item, .rejection-item {
+            display: inline-block;
+            margin: 15px;
+            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            font-size: 1.3em;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .movie-item:hover, .rejection-item:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 215, 61, 0.5);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .contact-info {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+
+        .contact-info a {
+            color: #ffd93d;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: #ff6b6b;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .about-section {
+                flex-direction: column;
+                padding: 30px;
+            }
+
+            .about-image {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .section-header h2 {
+                font-size: 1.8em;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <header>
+            <h1>⚓ Mary Celeste ⚓</h1>
+            <p class="tagline">Exploring the fascinating intersections of technology, science, art, and human experience through various media including talks, podcasts, articles, and films.</p>
+        </header>
+
+        <!-- ABOUT US SECTION -->
+        <div class="about-section">
+            <img src="https://i.imgur.com/GqeZ2yz.png" alt="Madelena Kishner and Riccardo Di Capua" class="about-image">
+            <div class="about-content">
+                <h2>About Us</h2>
+                <p>We explore the fascinating intersections of technology, science, art, and human experience through various media including talks, podcasts, articles, and films.</p>
+                <div class="creators-list">
+                    <div class="creator">👤 Madelena Kishner</div>
+                    <div class="creator">👤 Riccardo Di Capua</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PODCASTS SECTION -->
+        <div class="section">
+            <div class="section-header">
+                <h2>🎙️ Podcast Series</h2>
+                <p>Immersive audio journeys exploring AI, culture, and the cosmos</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>🤖 Artificial Intelligence in Our Daily Lives <span class="language-badge">ENG</span></h3>
+                    <p>Explore how AI is transforming every aspect of human existence across 10 comprehensive episodes.</p>
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2nla20Cx_YhowfaPPhDapFE" class="content-link" target="_blank">▶ Watch Series</a>
+                </div>
+                <div class="content-card">
+                    <h3>🤖 La Inteligencia Artificial En Nuestro Día A Día <span class="language-badge">ESP</span></h3>
+                    <p>Descubre cómo la IA está transformando cada aspecto de la existencia humana.</p>
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2kifI2VtTCvmSEnjyNM_tLl" class="content-link" target="_blank">▶ Ver Serie</a>
+                </div>
+                <div class="content-card">
+                    <h3>🤖 L'Intelligence Artificielle Dans Notre Vie <span class="language-badge">FRA</span></h3>
+                    <p>Découvrez comment l'IA transforme chaque aspect de l'existence humaine.</p>
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2nX3w49NEy72_aCDbAFB-LT" class="content-link" target="_blank">▶ Regarder</a>
+                </div>
+                <div class="content-card">
+                    <h3>🤖 Künstliche Intelligenz In Unserem Täglichen Leben <span class="language-badge">DEU</span></h3>
+                    <p>Entdecken Sie, wie KI jeden Aspekt der menschlichen Existenz transformiert.</p>
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2nxlWgZIuleAza_b7vJXhCe" class="content-link" target="_blank">▶ Ansehen</a>
+                </div>
+                <div class="content-card">
+                    <h3>🤖 L'intelligenza Artificiale Nella Nostra Vita <span class="language-badge">ITA</span></h3>
+                    <p>Scopri come l'IA sta trasformando ogni aspetto dell'esistenza umana.</p>
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2niighUsBNfd7rAMYqbHSwE" class="content-link" target="_blank">▶ Guarda</a>
+                </div>
+                <div class="content-card">
+                    <h3>👑 The Divine Marquise Luisa Casati</h3>
+                    <p>A fascinating exploration of one of history's most enigmatic and extravagant figures.</p>
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2mg8OZj_80UXOxqejIo13T_" class="content-link" target="_blank">▶ Listen Now</a>
+                </div>
+                <div class="content-card">
+                    <h3>🧪 MATERIALS - The Spectacular Science of Stuff</h3>
+                    <p>A captivating journey into the science behind the materials that shape our world and everyday lives.</p>
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2n1Wn6uFb-K7nezGOs3JoWm" class="content-link" target="_blank">▶ Watch Series</a>
+                </div>
+                <div class="content-card">
+                    <h3>🤝 Bound by Vision</h3>
+                    <p>Exploring the passionate partnerships and transformative collaborations that invented the modern world.</p>
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2kuJvR5hsUrGxEGiM4M2ZLE" class="content-link" target="_blank">▶ Watch Series</a>
+                </div>
+                <div class="content-card">
+                    <h3>🏛️ Rooms Where History Broke</h3>
+                    <p>A narrative journey through the rooms, chambers, and spaces where pivotal moments in history unfolded.</p>
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2mqiUFyDbkkK-O6eR1TqWmz" class="content-link" target="_blank">▶ Watch Series</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- STANDALONE PODCASTS -->
+        <div class="section">
+            <div class="section-header">
+                <h2>🎧 Featured Episodes</h2>
+                <p>Deep dives into science, music, and cosmic phenomena</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>🌅 AI - Crack of Dawn</h3>
+                    <a href="https://youtu.be/_fwVZSDqSIE" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+                <div class="content-card">
+                    <h3>🌌 The Ultimate Fate of the Universe</h3>
+                    <a href="https://youtu.be/-nmia1KlldM" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+                <div class="content-card">
+                    <h3>🗣️ The World's Oldest Languages</h3>
+                    <a href="https://youtu.be/i-usiA9-UR8" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+                <div class="content-card">
+                    <h3>⚛️ Quantum Entanglement</h3>
+                    <a href="https://youtu.be/Kd6vANE_uv4" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+                <div class="content-card">
+                    <h3>💻 Quantum Computing</h3>
+                    <a href="https://youtu.be/NEpwCst_WIo" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+                <div class="content-card">
+                    <h3>🎯 Fine Tuning of the Universe for Life</h3>
+                    <a href="https://youtu.be/BI55_2-Yo34" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+                <div class="content-card">
+                    <h3>⭐ Cosmic Chronicles: The Story of a Star</h3>
+                    <a href="https://youtu.be/-ZtquYitXj4" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+                <div class="content-card">
+                    <h3>🌍 Advanced Technology & Planetary Computation</h3>
+                    <a href="https://youtu.be/mmwB0Y8Vb8E" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+                <div class="content-card">
+                    <h3>🎵 Beethoven's Fifth Symphony: European Destiny</h3>
+                    <a href="https://youtu.be/NvixR4VwgQo" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+                <div class="content-card">
+                    <h3>🎼 Beethoven's Fifth: Destiny, Victory & Peace</h3>
+                    <a href="https://youtu.be/8iqLUxuxzdM" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+                <div class="content-card">
+                    <h3>🌟 The Fine-Tuned Universe: Cosmic Constants</h3>
+                    <a href="https://youtu.be/x-tWE9hH6KE" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+                <div class="content-card">
+                    <h3>🎶 The Geometry of Music</h3>
+                    <a href="https://youtu.be/qtQ7vx14GoQ" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+                <div class="content-card">
+                    <h3>🎵 The Mathematics and Geometry of Music</h3>
+                    <a href="https://youtu.be/ytup31PAKy8" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+                <div class="content-card">
+                    <h3>📚 The Dark Truth of Brothers Grimm Fairy Tales</h3>
+                    <a href="https://youtu.be/y9ymfXxTA58" class="content-link" target="_blank">▶ Watch</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- TALKS SECTION -->
+        <div class="section">
+            <div class="section-header">
+                <h2>💬 Talks & Presentations</h2>
+                <p>Thought-provoking presentations on AI and the future</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>✨ Artificial Intelligence with a Magic Show</h3>
+                    <p>An engaging presentation combining AI concepts with magical demonstrations.</p>
+                    <a href="https://youtu.be/cryBZMBSe9w" class="content-link" target="_blank">▶ Watch Talk</a>
+                </div>
+                <div class="content-card">
+                    <h3>🧬 DNA - A Scaffolding for AI</h3>
+                    <p>Exploring the parallels between biological DNA and artificial intelligence architectures.</p>
+                    <a href="https://youtu.be/ZbY-e3WvefU" class="content-link" target="_blank">▶ Watch Talk</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOOKS SECTION -->
+        <div class="section">
+            <div class="section-header">
+                <h2>📚 Books & Publications</h2>
+                <p>In-depth explorations of transformative ideas</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>🧬 DNA - A Scaffolding for AI</h3>
+                    <p>A comprehensive examination of biological principles informing artificial intelligence.</p>
+                    <a href="https://www.amazon.com/DNA-Scaffolding-Artificial-Intelligence-AI/dp/B0DPKKBYBX" class="content-link" target="_blank">▶ View Book</a>
+                </div>
+                <div class="content-card">
+                    <h3>🤖 AI in Our Daily Lives</h3>
+                    <p>A detailed look at how artificial intelligence is reshaping every aspect of modern existence.</p>
+                    <a href="https://www.amazon.com/Artificial-Intelligence-AI-Our-Daily/dp/B0DPJXHM69" class="content-link" target="_blank">▶ View Book</a>
+                </div>
+                <div class="content-card">
+                    <h3>⏳ Journey Through Time: From Big Bang To Big Dreams</h3>
+                    <p>An epic exploration of cosmic evolution and human aspiration.</p>
+                    <a href="https://www.blurb.com/b/12603459-journey-through-time-from-big-bang-to-big-dreams" class="content-link" target="_blank">▶ View Book</a>
+                </div>
+                <div class="content-card">
+                    <h3>👻 Whispers of the Unseen and Other Tales</h3>
+                    <p>A collection of captivating stories exploring the mysterious and unseen aspects of our world.</p>
+                    <a href="https://www.amazon.com/dp/B0GDY6XCVX?ref=yb_qv_ov_prnt_dp_rw" class="content-link" target="_blank">▶ View Book</a>
+                </div>
+                <div class="content-card">
+                    <h3>🤝 Bound by Vision: The Passionate Partnerships That Invented the Modern World</h3>
+                    <p>An illuminating exploration of the transformative collaborations and creative partnerships that shaped our modern world.</p>
+                    <a href="https://www.amazon.com/Bound-Vision-Passionate-Partnerships-Invented/dp/B0GLYZ68R5/ref=sr_1_1?dib=eyJ2IjoiMSJ9.uIPCxj6KeET_NK-Scvho_QkrjTlMyF4E0YpQJ3EHbhiMNlWNGqY9hFCnf3uzV9BisbRGF4eNRP2PE134aUb7-kU0qSHyPR2cvQFl3ioXrkc.kLUCKd1ldoPHZVslCWqO9-RlaUwkdlT8-jDxgUvhW1k&dib_tag=se&qid=1771962534&refinements=p_27%3ARiccardo+Di+Capua&s=books&sr=1-1&text=Riccardo+Di+Capua" class="content-link" target="_blank">▶ View Book</a>
+                </div>
+                <div class="content-card">
+                    <h3>🏛️ Rooms Where History Broke</h3>
+                    <p>Fifteen stories of the spaces where pivotal moments in history unfolded — a literary narrative nonfiction collection.</p>
+                    <a href="https://www.amazon.com/dp/B0GV42WMXW" class="content-link" target="_blank">▶ View Book</a>
+                </div>
+                <div class="content-card">
+                    <h3>🦁 The Stones Remember: Peggy Guggenheim, Luisa Casati, and the Poet Who Burned the World</h3>
+                    <p>A Venice-set historical fiction told in alternating voices — three extraordinary lives converging in La Serenissima.</p>
+                    <a href="https://www.amazon.com/Stones-Remember-Guggenheim-Casati-Burned/dp/B0GSQDBVH8/ref=tmm_pap_swatch_0" class="content-link" target="_blank">▶ View Book</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARTICLES - AI & TECHNOLOGY -->
+        <div class="section">
+            <div class="section-header">
+                <h2>📄 Articles: AI & Technology</h2>
+                <p>Cutting-edge analysis of artificial intelligence's impact on society</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>The Evolution and Adaptation of the Dining Experience in the Coming Age of AI</h3>
+                </div>
+                <div class="content-card">
+                    <h3>The Evolution of Post-Dinner Leisure in American Life</h3>
+                </div>
+                <div class="content-card">
+                    <h3>AI - Governance and Control</h3>
+                </div>
+                <div class="content-card">
+                    <h3>Algorithmic Intimacy: The Transformation of Romantic Connection in the Age of AI</h3>
+                </div>
+                <div class="content-card">
+                    <h3>Domestic Automation in the Age of AI: The Reconceptualization of Household Labor</h3>
+                </div>
+                <div class="content-card">
+                    <h3>Pharmakon: The Dual Nature of Healing, Harming, and the Future of AI</h3>
+                </div>
+                <div class="content-card">
+                    <h3>Any sufficiently advanced technology is indistinguishable from life: Planetary Computation</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARTICLES - SCIENCE & COSMOS -->
+        <div class="section">
+            <div class="section-header">
+                <h2>🌌 Articles: Science & Cosmos</h2>
+                <p>Exploring the universe, quantum mechanics, and fundamental physics</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>The Cosmic Origins and Terrestrial Abundance of Water</h3>
+                </div>
+                <div class="content-card">
+                    <h3>The Goldilocks Universe: Why Is Everything "Just Right"</h3>
+                </div>
+                <div class="content-card">
+                    <h3>Cosmic Chronicles: The Story of a Star</h3>
+                </div>
+                <div class="content-card">
+                    <h3>Quantum Computing: Fundamentals and Applications</h3>
+                </div>
+                <div class="content-card">
+                    <h3>The Accelerated Ascent of Humankind</h3>
+                </div>
+                <div class="content-card">
+                    <h3>Turing Test: Temporal Paradox Analysis</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARTICLES - CULTURE & HISTORY -->
+        <div class="section">
+            <div class="section-header">
+                <h2>🎨 Articles: Culture, History & Arts</h2>
+                <p>Deep dives into cultural phenomena and historical mysteries</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Marchesa Luisa Casati - The Divine Marquise</h3>
+                </div>
+                <div class="content-card">
+                    <h3>The Venetian Genesis: How La Serenissima Invented the Modern Patent System</h3>
+                </div>
+                <div class="content-card">
+                    <h3>Ghost on the Water: The Mary Celeste Enigma</h3>
+                </div>
+                <div class="content-card">
+                    <h3>Beethoven's Fifth Symphony: The Inadvertent Prophecy of European Destiny</h3>
+                </div>
+                <div class="content-card">
+                    <h3>Harmonia et Geometria: Mathematical and Geometric Foundations of Musical Structure</h3>
+                </div>
+                <div class="content-card">
+                    <h3>From Clay Blobs to Keyboards: The Amazing Story of How We Learned to Write</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARTICLES - SPECIALIZED TOPICS -->
+        <div class="section">
+            <div class="section-header">
+                <h2>🔬 Articles: Specialized Research</h2>
+                <p>In-depth analysis of niche topics and phenomena</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>The Neurobiological Impact of Caffeine: A Comparative Analysis of Green Tea and Espresso Consumption</h3>
+                </div>
+                <div class="content-card">
+                    <h3>The Faustian Bargain of Mathematics - II</h3>
+                </div>
+                <div class="content-card">
+                    <h3>Basque Cheesecake with Molten Dark Belgian Chocolate</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOVIES SECTION -->
+        <div class="movies-section">
+            <h2>🎬 Films in Production</h2>
+            <div class="movie-item">🎥 Mary Celeste</div>
+            <div class="movie-item">👑 The Divine Marquise</div>
+        </div>
+
+        <!-- REJECTIONS SECTION -->
+        <div class="rejections-section">
+            <h2>📋 Conference Submissions</h2>
+            <div class="rejection-item">AI - Governance and Control<br><small>(San Diego CA, 2025)</small></div>
+        </div>
+
+        <footer>
+            <h2>Connect With Us</h2>
+            <div class="contact-info">
+                📧 <a href="mailto:OurMaryCeleste@gmail.com">OurMaryCeleste@gmail.com</a>
+            </div>
+            <p style="margin-top: 30px; opacity: 0.7;">© 2026 Mary Celeste LLC</p>
+        </footer>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Create animated stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Add parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.content-card');
