@@ -3,698 +3,1044 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mary Celeste | Exploring Technology, Science, Art & Human Experience</title>
+    <title>Mary Celeste | Stories Worth Keeping</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --cream:      #faf7f2;
+            --parchment:  #f0ebe0;
+            --white:      #ffffff;
+            --navy:       #0f1f3d;
+            --navy-deep:  #091528;
+            --navy-mid:   #162848;
+            --ink:        #1a1612;
+            --ink-soft:   #3a3228;
+            --gold:       #c9a84c;
+            --gold-light: #e0c070;
+            --gold-dim:   rgba(201,168,76,0.25);
+            --rust:       #8b3a2a;
+            --muted:      #7a6f5e;
+            --muted-navy: rgba(255,255,255,0.55);
+            --rule-light: #d8cfc0;
+            --rule-navy:  rgba(201,168,76,0.2);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            overflow-x: hidden;
+            font-family: 'Lato', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            font-size: 17px;
+            line-height: 1.7;
         }
 
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            padding: 60px 20px;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: fadeInDown 1s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        h1 {
-            font-size: 4.5em;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4d96ff);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientShift 5s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .tagline {
-            font-size: 1.5em;
-            opacity: 0.9;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .about-section {
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(15px);
-            border-radius: 30px;
-            padding: 50px;
-            margin-bottom: 60px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+        /* ─────────────── NAV ─────────────── */
+        nav {
+            background: var(--navy-deep);
             display: flex;
             align-items: center;
-            gap: 40px;
-            animation: fadeIn 1s ease-out;
+            justify-content: space-between;
+            padding: 18px 56px;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            border-bottom: 2px solid var(--gold-dim);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .nav-brand {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 0.35em;
+            color: var(--gold-light);
+            text-decoration: none;
+            text-transform: uppercase;
         }
 
-        .about-image {
-            flex-shrink: 0;
-            width: 300px;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-            border: 3px solid rgba(255, 215, 61, 0.4);
-            transition: transform 0.3s ease;
-        }
-
-        .about-image:hover {
-            transform: scale(1.05);
-            border-color: rgba(255, 215, 61, 0.8);
-        }
-
-        .about-content h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #ffd93d;
-        }
-
-        .about-content p {
-            font-size: 1.3em;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            opacity: 0.95;
-        }
-
-        .creators-list {
+        .nav-links {
             display: flex;
-            gap: 30px;
-            margin-top: 20px;
-            flex-wrap: wrap;
+            gap: 36px;
+            list-style: none;
         }
 
-        .creator {
-            font-size: 1.2em;
-            padding: 12px 25px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+        .nav-links a {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            color: var(--muted-navy);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.2s;
         }
+        .nav-links a:hover { color: var(--gold-light); }
 
-        .section {
-            margin-bottom: 60px;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .section-header {
-            text-align: center;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            margin-bottom: 30px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .section-header h2 {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            color: #ffd93d;
-        }
-
-        .section-header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .content-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 25px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+        /* ─────────────── HERO ─────────────── */
+        .hero {
+            background: var(--navy);
+            color: var(--cream);
+            padding: 90px 56px 100px;
             position: relative;
             overflow: hidden;
         }
 
-        .content-card::before {
-            content: '';
+        .hero::before {
+            content: '⚓';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 28rem;
+            opacity: 0.03;
+            line-height: 1;
+            pointer-events: none;
         }
 
-        .content-card:hover::before {
-            left: 100%;
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
-        .content-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.5);
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: clamp(3.4rem, 6vw, 6rem);
+            line-height: 1.0;
+            margin-bottom: 28px;
+            letter-spacing: -0.01em;
         }
 
-        .content-card h3 {
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            color: #6bcf7f;
-            line-height: 1.4;
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold-light);
         }
 
-        .content-card p {
-            font-size: 1.05em;
-            line-height: 1.6;
-            opacity: 0.9;
-            margin-bottom: 15px;
-        }
-
-        .content-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s;
-            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
-            margin-top: 10px;
-            font-size: 0.95em;
-        }
-
-        .content-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 30px rgba(255, 107, 107, 0.6);
-        }
-
-        .language-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            background: rgba(255, 215, 61, 0.3);
-            border-radius: 10px;
-            font-size: 0.85em;
-            margin-left: 8px;
-            color: #ffd93d;
-            font-weight: bold;
-        }
-
-        .movies-section, .rejections-section {
-            text-align: center;
-            padding: 50px;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+        .hero-sub {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--muted-navy);
+            max-width: 420px;
             margin-bottom: 40px;
         }
 
-        .movies-section h2, .rejections-section h2 {
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            color: #ff6b6b;
-        }
-
-        .movie-item, .rejection-item {
+        .hero-cta {
             display: inline-block;
-            margin: 15px;
-            padding: 20px 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            font-size: 1.3em;
-            transition: all 0.3s;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .movie-item:hover, .rejection-item:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 215, 61, 0.5);
-        }
-
-        footer {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .contact-info {
-            font-size: 1.2em;
-            margin: 20px 0;
-        }
-
-        .contact-info a {
-            color: #ffd93d;
+            padding: 15px 40px;
+            background: var(--gold);
+            color: var(--navy-deep);
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .hero-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
         }
 
-        .contact-info a:hover {
-            color: #ff6b6b;
+        .hero-stat {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--rule-navy);
+            padding: 28px 32px;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-            }
+        .hero-stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            font-weight: 400;
+            color: var(--gold-light);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
 
-            .about-section {
-                flex-direction: column;
-                padding: 30px;
-            }
+        .hero-stat-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--muted-navy);
+        }
 
-            .about-image {
-                width: 100%;
-                max-width: 300px;
-            }
+        /* ─────────────── SHARED ─────────────── */
+        .section-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 72px 56px;
+        }
 
-            .section-header h2 {
-                font-size: 1.8em;
-            }
+        .section-head {
+            display: flex;
+            align-items: baseline;
+            gap: 24px;
+            margin-bottom: 44px;
+            padding-bottom: 18px;
+        }
 
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
+        .section-head h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.6rem;
+            font-weight: 600;
+            line-height: 1;
+        }
+        .section-head h2 em { font-style: italic; }
+
+        .section-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+        }
+
+        /* light sections */
+        .bg-cream  { background: var(--cream); }
+        .bg-parch  { background: var(--parchment); border-top: 1px solid var(--rule-light); border-bottom: 1px solid var(--rule-light); }
+        .bg-white  { background: var(--white); }
+
+        .bg-cream  .section-head,
+        .bg-parch  .section-head,
+        .bg-white  .section-head  { border-bottom: 2px solid var(--ink); }
+        .bg-cream  .section-head h2 em,
+        .bg-parch  .section-head h2 em,
+        .bg-white  .section-head h2 em { color: var(--gold); }
+        .bg-cream  .section-tag,
+        .bg-parch  .section-tag,
+        .bg-white  .section-tag { color: var(--muted); }
+
+        /* navy sections */
+        .bg-navy   { background: var(--navy); color: var(--cream); }
+        .bg-navy-d { background: var(--navy-deep); color: var(--cream); }
+
+        .bg-navy   .section-head,
+        .bg-navy-d .section-head { border-bottom: 1px solid var(--rule-navy); }
+        .bg-navy   .section-head h2 em,
+        .bg-navy-d .section-head h2 em { color: var(--gold-light); }
+        .bg-navy   .section-tag,
+        .bg-navy-d .section-tag { color: var(--muted-navy); }
+
+        /* ─────────────── BOOKS ─────────────── */
+        .book-list {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .book-row {
+            display: grid;
+            grid-template-columns: 72px 1fr auto;
+            align-items: center;
+            gap: 36px;
+            padding: 28px 36px;
+            background: var(--white);
+            border: 1px solid var(--rule-light);
+            text-decoration: none;
+            color: inherit;
+            transition: border-color 0.25s, box-shadow 0.25s, background 0.2s;
+        }
+
+        .book-row:hover {
+            border-color: var(--gold);
+            box-shadow: 4px 0 0 0 var(--gold), 0 6px 24px rgba(201,168,76,0.12);
+            background: #fffef9;
+            z-index: 1;
+        }
+
+        .book-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--rule-light);
+            line-height: 1;
+            text-align: center;
+            transition: color 0.25s;
+        }
+        .book-row:hover .book-num { color: var(--gold); }
+
+        .book-genre-tag {
+            font-size: 0.7rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .book-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--ink);
+            margin-bottom: 7px;
+        }
+        .book-title em { font-style: italic; }
+
+        .book-desc {
+            font-size: 0.93rem;
+            color: var(--muted);
+            line-height: 1.65;
+            max-width: 580px;
+        }
+
+        .book-arrow {
+            font-size: 1.6rem;
+            color: var(--rule-light);
+            transition: color 0.25s, transform 0.25s;
+            padding-right: 6px;
+            flex-shrink: 0;
+        }
+        .book-row:hover .book-arrow { color: var(--gold); transform: translateX(5px); }
+
+        /* ─────────────── ABOUT ─────────────── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 72px;
+            align-items: start;
+        }
+
+        .about-img {
+            width: 100%;
+            display: block;
+            border: 5px solid var(--white);
+            box-shadow: 0 12px 40px rgba(26,22,18,0.18);
+        }
+
+        .about-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+        .about-text h2 em { font-style: italic; color: var(--rust); }
+
+        .about-text p {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: var(--ink-soft);
+            margin-bottom: 18px;
+        }
+
+        .founders {
+            display: flex;
+            gap: 40px;
+            margin-top: 36px;
+            padding-top: 28px;
+            border-top: 1px solid var(--rule-light);
+        }
+
+        .founder-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .founder-role {
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 3px;
+        }
+
+        /* ─────────────── PODCASTS ─────────────── */
+        .podcast-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .podcast-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--rule-navy);
+            padding: 32px 28px 26px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: border-color 0.25s, background 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .podcast-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            height: 3px; width: 100%;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .podcast-card:hover {
+            border-color: var(--gold);
+            background: rgba(201,168,76,0.06);
+        }
+        .podcast-card:hover::before { transform: scaleX(1); }
+
+        .podcast-label {
+            font-size: 0.66rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .podcast-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.22rem;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--cream);
+        }
+
+        .podcast-desc {
+            font-size: 0.88rem;
+            line-height: 1.65;
+            color: var(--muted-navy);
+            flex: 1;
+        }
+
+        .lang-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .lang-badge {
+            display: inline-block;
+            padding: 4px 11px;
+            background: rgba(201,168,76,0.15);
+            border: 1px solid var(--rule-navy);
+            border-radius: 2px;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            color: var(--gold-light);
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .lang-badge:hover {
+            background: rgba(201,168,76,0.3);
+            border-color: var(--gold);
+        }
+
+        .podcast-watch {
+            font-size: 0.7rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-top: 8px;
+            opacity: 0.75;
+            transition: opacity 0.2s;
+        }
+        .podcast-card:hover .podcast-watch { opacity: 1; }
+
+        /* ─────────────── ARTICLES ─────────────── */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .article-category {
+            background: var(--white);
+            border: 1px solid var(--rule-light);
+            border-top: 4px solid var(--gold);
+            padding: 32px 28px;
+        }
+
+        .article-cat-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--rule-light);
+        }
+
+        .article-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .article-list li {
+            font-size: 0.93rem;
+            line-height: 1.5;
+            color: var(--ink-soft);
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .article-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 0.8rem;
+        }
+
+        /* ─────────────── FEATURED EPISODES ─────────────── */
+        .episodes-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3px;
+        }
+
+        .episode-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--rule-navy);
+            padding: 22px 20px;
+            text-decoration: none;
+            color: var(--cream);
+            display: block;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .episode-card:hover {
+            background: rgba(201,168,76,0.08);
+            border-color: var(--gold);
+        }
+
+        .episode-icon {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .episode-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--cream);
+        }
+
+        /* ─────────────── FILMS ─────────────── */
+        .films-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .film-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--rule-navy);
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .film-icon {
+            font-size: 2.8rem;
+            flex-shrink: 0;
+        }
+
+        .film-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .film-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--cream);
+        }
+
+        /* ─────────────── TALKS ─────────────── */
+        .talks-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .talk-card {
+            border: 1px solid var(--rule-light);
+            background: var(--white);
+            padding: 36px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .talk-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 4px 20px rgba(201,168,76,0.12);
+        }
+
+        .talk-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.6rem;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--rule-light);
+            line-height: 1;
+        }
+
+        .talk-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.45rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.3;
+        }
+
+        .talk-link {
+            font-size: 0.7rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .talk-card:hover .talk-link { opacity: 1; }
+
+        /* ─────────────── FOOTER ─────────────── */
+        footer {
+            background: var(--navy-deep);
+            color: var(--cream);
+            border-top: 3px solid var(--gold);
+            padding: 56px;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 28px;
+        }
+
+        .footer-brand {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.35em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .footer-brand span {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            color: var(--cream);
+            margin-top: 4px;
+        }
+
+        .footer-email a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-size: 1.05rem;
+            transition: color 0.2s;
+        }
+        .footer-email a:hover { color: #fff; }
+
+        .footer-copy {
+            font-size: 0.78rem;
+            color: rgba(250,247,242,0.4);
+            text-align: right;
+            line-height: 1.6;
+        }
+
+        /* ─────────────── RESPONSIVE ─────────────── */
+        @media (max-width: 960px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .hero { padding: 56px 24px 64px; }
+            .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+            .hero-stats { grid-template-columns: 1fr 1fr; }
+            .section-wrap { padding: 52px 24px; }
+            .book-row { grid-template-columns: 52px 1fr; }
+            .book-arrow { display: none; }
+            .about-grid { grid-template-columns: 1fr; }
+            .podcast-grid { grid-template-columns: 1fr 1fr; }
+            .articles-grid { grid-template-columns: 1fr; }
+            .episodes-grid { grid-template-columns: 1fr 1fr; }
+            .films-row { grid-template-columns: 1fr; }
+            .talks-grid { grid-template-columns: 1fr; }
+            footer { padding: 40px 24px; }
+            .footer-inner { flex-direction: column; align-items: flex-start; }
+            .footer-copy { text-align: left; }
+        }
+
+        @media (max-width: 600px) {
+            .podcast-grid { grid-template-columns: 1fr; }
+            .episodes-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="stars" id="stars"></div>
-    
-    <div class="container">
-        <header>
-            <h1>⚓ Mary Celeste ⚓</h1>
-            <p class="tagline">Exploring the fascinating intersections of technology, science, art, and human experience through various media including talks, podcasts, articles, and films.</p>
-        </header>
 
-        <!-- ABOUT US SECTION -->
-        <div class="about-section">
-            <img src="https://i.imgur.com/GqeZ2yz.png" alt="Madelena Kishner and Riccardo Di Capua" class="about-image">
-            <div class="about-content">
-                <h2>About Us</h2>
-                <p>We explore the fascinating intersections of technology, science, art, and human experience through various media including talks, podcasts, articles, and films.</p>
-                <div class="creators-list">
-                    <div class="creator">👤 Madelena Kishner</div>
-                    <div class="creator">👤 Riccardo Di Capua</div>
-                </div>
+<!-- NAV -->
+<nav>
+    <a href="#" class="nav-brand">⚓ &nbsp;Mary Celeste</a>
+    <ul class="nav-links">
+        <li><a href="#books">Books</a></li>
+        <li><a href="#podcasts">Podcasts</a></li>
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="#talks">Talks</a></li>
+        <li><a href="#films">Films</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div>
+            <h1>Stories<br><em>worth</em><br>keeping.</h1>
+            <p class="hero-sub">Narrative nonfiction, historical fiction, and ideas that linger long after the last page — from Madelena Kishner and Riccardo Di Capua.</p>
+            <a href="#books" class="hero-cta">Explore the Collection</a>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-num">6</div>
+                <div class="hero-stat-label">Books Published</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">5</div>
+                <div class="hero-stat-label">Podcast Series</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">5</div>
+                <div class="hero-stat-label">Languages</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">2</div>
+                <div class="hero-stat-label">Films in Production</div>
             </div>
         </div>
-
-        <!-- PODCASTS SECTION -->
-        <div class="section">
-            <div class="section-header">
-                <h2>🎙️ Podcast Series</h2>
-                <p>Immersive audio journeys exploring AI, culture, and the cosmos</p>
-            </div>
-            <div class="content-grid">
-                <div class="content-card">
-                    <h3>🤖 Artificial Intelligence in Our Daily Lives <span class="language-badge">ENG</span></h3>
-                    <p>Explore how AI is transforming every aspect of human existence across 10 comprehensive episodes.</p>
-                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2nla20Cx_YhowfaPPhDapFE" class="content-link" target="_blank">▶ Watch Series</a>
-                </div>
-                <div class="content-card">
-                    <h3>🤖 La Inteligencia Artificial En Nuestro Día A Día <span class="language-badge">ESP</span></h3>
-                    <p>Descubre cómo la IA está transformando cada aspecto de la existencia humana.</p>
-                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2kifI2VtTCvmSEnjyNM_tLl" class="content-link" target="_blank">▶ Ver Serie</a>
-                </div>
-                <div class="content-card">
-                    <h3>🤖 L'Intelligence Artificielle Dans Notre Vie <span class="language-badge">FRA</span></h3>
-                    <p>Découvrez comment l'IA transforme chaque aspect de l'existence humaine.</p>
-                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2nX3w49NEy72_aCDbAFB-LT" class="content-link" target="_blank">▶ Regarder</a>
-                </div>
-                <div class="content-card">
-                    <h3>🤖 Künstliche Intelligenz In Unserem Täglichen Leben <span class="language-badge">DEU</span></h3>
-                    <p>Entdecken Sie, wie KI jeden Aspekt der menschlichen Existenz transformiert.</p>
-                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2nxlWgZIuleAza_b7vJXhCe" class="content-link" target="_blank">▶ Ansehen</a>
-                </div>
-                <div class="content-card">
-                    <h3>🤖 L'intelligenza Artificiale Nella Nostra Vita <span class="language-badge">ITA</span></h3>
-                    <p>Scopri come l'IA sta trasformando ogni aspetto dell'esistenza umana.</p>
-                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2niighUsBNfd7rAMYqbHSwE" class="content-link" target="_blank">▶ Guarda</a>
-                </div>
-                <div class="content-card">
-                    <h3>👑 The Divine Marquise Luisa Casati</h3>
-                    <p>A fascinating exploration of one of history's most enigmatic and extravagant figures.</p>
-                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2mg8OZj_80UXOxqejIo13T_" class="content-link" target="_blank">▶ Listen Now</a>
-                </div>
-                <div class="content-card">
-                    <h3>🧪 MATERIALS - The Spectacular Science of Stuff</h3>
-                    <p>A captivating journey into the science behind the materials that shape our world and everyday lives.</p>
-                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2n1Wn6uFb-K7nezGOs3JoWm" class="content-link" target="_blank">▶ Watch Series</a>
-                </div>
-                <div class="content-card">
-                    <h3>🤝 Bound by Vision</h3>
-                    <p>Exploring the passionate partnerships and transformative collaborations that invented the modern world.</p>
-                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2kuJvR5hsUrGxEGiM4M2ZLE" class="content-link" target="_blank">▶ Watch Series</a>
-                </div>
-                <div class="content-card">
-                    <h3>🏛️ Rooms Where History Broke</h3>
-                    <p>A narrative journey through the rooms, chambers, and spaces where pivotal moments in history unfolded.</p>
-                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2mqiUFyDbkkK-O6eR1TqWmz" class="content-link" target="_blank">▶ Watch Series</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- STANDALONE PODCASTS -->
-        <div class="section">
-            <div class="section-header">
-                <h2>🎧 Featured Episodes</h2>
-                <p>Deep dives into science, music, and cosmic phenomena</p>
-            </div>
-            <div class="content-grid">
-                <div class="content-card">
-                    <h3>🌅 AI - Crack of Dawn</h3>
-                    <a href="https://youtu.be/_fwVZSDqSIE" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-                <div class="content-card">
-                    <h3>🌌 The Ultimate Fate of the Universe</h3>
-                    <a href="https://youtu.be/-nmia1KlldM" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-                <div class="content-card">
-                    <h3>🗣️ The World's Oldest Languages</h3>
-                    <a href="https://youtu.be/i-usiA9-UR8" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-                <div class="content-card">
-                    <h3>⚛️ Quantum Entanglement</h3>
-                    <a href="https://youtu.be/Kd6vANE_uv4" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-                <div class="content-card">
-                    <h3>💻 Quantum Computing</h3>
-                    <a href="https://youtu.be/NEpwCst_WIo" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-                <div class="content-card">
-                    <h3>🎯 Fine Tuning of the Universe for Life</h3>
-                    <a href="https://youtu.be/BI55_2-Yo34" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-                <div class="content-card">
-                    <h3>⭐ Cosmic Chronicles: The Story of a Star</h3>
-                    <a href="https://youtu.be/-ZtquYitXj4" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-                <div class="content-card">
-                    <h3>🌍 Advanced Technology & Planetary Computation</h3>
-                    <a href="https://youtu.be/mmwB0Y8Vb8E" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-                <div class="content-card">
-                    <h3>🎵 Beethoven's Fifth Symphony: European Destiny</h3>
-                    <a href="https://youtu.be/NvixR4VwgQo" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-                <div class="content-card">
-                    <h3>🎼 Beethoven's Fifth: Destiny, Victory & Peace</h3>
-                    <a href="https://youtu.be/8iqLUxuxzdM" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-                <div class="content-card">
-                    <h3>🌟 The Fine-Tuned Universe: Cosmic Constants</h3>
-                    <a href="https://youtu.be/x-tWE9hH6KE" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-                <div class="content-card">
-                    <h3>🎶 The Geometry of Music</h3>
-                    <a href="https://youtu.be/qtQ7vx14GoQ" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-                <div class="content-card">
-                    <h3>🎵 The Mathematics and Geometry of Music</h3>
-                    <a href="https://youtu.be/ytup31PAKy8" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-                <div class="content-card">
-                    <h3>📚 The Dark Truth of Brothers Grimm Fairy Tales</h3>
-                    <a href="https://youtu.be/y9ymfXxTA58" class="content-link" target="_blank">▶ Watch</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- TALKS SECTION -->
-        <div class="section">
-            <div class="section-header">
-                <h2>💬 Talks & Presentations</h2>
-                <p>Thought-provoking presentations on AI and the future</p>
-            </div>
-            <div class="content-grid">
-                <div class="content-card">
-                    <h3>✨ Artificial Intelligence with a Magic Show</h3>
-                    <p>An engaging presentation combining AI concepts with magical demonstrations.</p>
-                    <a href="https://youtu.be/cryBZMBSe9w" class="content-link" target="_blank">▶ Watch Talk</a>
-                </div>
-                <div class="content-card">
-                    <h3>🧬 DNA - A Scaffolding for AI</h3>
-                    <p>Exploring the parallels between biological DNA and artificial intelligence architectures.</p>
-                    <a href="https://youtu.be/ZbY-e3WvefU" class="content-link" target="_blank">▶ Watch Talk</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- BOOKS SECTION -->
-        <div class="section">
-            <div class="section-header">
-                <h2>📚 Books & Publications</h2>
-                <p>In-depth explorations of transformative ideas</p>
-            </div>
-            <div class="content-grid">
-                <div class="content-card">
-                    <h3>🧬 DNA - A Scaffolding for AI</h3>
-                    <p>A comprehensive examination of biological principles informing artificial intelligence.</p>
-                    <a href="https://www.amazon.com/DNA-Scaffolding-Artificial-Intelligence-AI/dp/B0DPKKBYBX" class="content-link" target="_blank">▶ View Book</a>
-                </div>
-                <div class="content-card">
-                    <h3>🤖 AI in Our Daily Lives</h3>
-                    <p>A detailed look at how artificial intelligence is reshaping every aspect of modern existence.</p>
-                    <a href="https://www.amazon.com/Artificial-Intelligence-AI-Our-Daily/dp/B0DPJXHM69" class="content-link" target="_blank">▶ View Book</a>
-                </div>
-                <div class="content-card">
-                    <h3>⏳ Journey Through Time: From Big Bang To Big Dreams</h3>
-                    <p>An epic exploration of cosmic evolution and human aspiration.</p>
-                    <a href="https://www.blurb.com/b/12603459-journey-through-time-from-big-bang-to-big-dreams" class="content-link" target="_blank">▶ View Book</a>
-                </div>
-                <div class="content-card">
-                    <h3>👻 Whispers of the Unseen and Other Tales</h3>
-                    <p>A collection of captivating stories exploring the mysterious and unseen aspects of our world.</p>
-                    <a href="https://www.amazon.com/dp/B0GDY6XCVX?ref=yb_qv_ov_prnt_dp_rw" class="content-link" target="_blank">▶ View Book</a>
-                </div>
-                <div class="content-card">
-                    <h3>🤝 Bound by Vision: The Passionate Partnerships That Invented the Modern World</h3>
-                    <p>An illuminating exploration of the transformative collaborations and creative partnerships that shaped our modern world.</p>
-                    <a href="https://www.amazon.com/Bound-Vision-Passionate-Partnerships-Invented/dp/B0GLYZ68R5/ref=sr_1_1?dib=eyJ2IjoiMSJ9.uIPCxj6KeET_NK-Scvho_QkrjTlMyF4E0YpQJ3EHbhiMNlWNGqY9hFCnf3uzV9BisbRGF4eNRP2PE134aUb7-kU0qSHyPR2cvQFl3ioXrkc.kLUCKd1ldoPHZVslCWqO9-RlaUwkdlT8-jDxgUvhW1k&dib_tag=se&qid=1771962534&refinements=p_27%3ARiccardo+Di+Capua&s=books&sr=1-1&text=Riccardo+Di+Capua" class="content-link" target="_blank">▶ View Book</a>
-                </div>
-                <div class="content-card">
-                    <h3>🏛️ Rooms Where History Broke</h3>
-                    <p>Fifteen stories of the spaces where pivotal moments in history unfolded — a literary narrative nonfiction collection.</p>
-                    <a href="https://www.amazon.com/dp/B0GV42WMXW" class="content-link" target="_blank">▶ View Book</a>
-                </div>
-                <div class="content-card">
-                    <h3>🦁 The Stones Remember: Peggy Guggenheim, Luisa Casati, and the Poet Who Burned the World</h3>
-                    <p>A Venice-set historical fiction told in alternating voices — three extraordinary lives converging in La Serenissima.</p>
-                    <a href="https://www.amazon.com/Stones-Remember-Guggenheim-Casati-Burned/dp/B0GSQDBVH8/ref=tmm_pap_swatch_0" class="content-link" target="_blank">▶ View Book</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- ARTICLES - AI & TECHNOLOGY -->
-        <div class="section">
-            <div class="section-header">
-                <h2>📄 Articles: AI & Technology</h2>
-                <p>Cutting-edge analysis of artificial intelligence's impact on society</p>
-            </div>
-            <div class="content-grid">
-                <div class="content-card">
-                    <h3>The Evolution and Adaptation of the Dining Experience in the Coming Age of AI</h3>
-                </div>
-                <div class="content-card">
-                    <h3>The Evolution of Post-Dinner Leisure in American Life</h3>
-                </div>
-                <div class="content-card">
-                    <h3>AI - Governance and Control</h3>
-                </div>
-                <div class="content-card">
-                    <h3>Algorithmic Intimacy: The Transformation of Romantic Connection in the Age of AI</h3>
-                </div>
-                <div class="content-card">
-                    <h3>Domestic Automation in the Age of AI: The Reconceptualization of Household Labor</h3>
-                </div>
-                <div class="content-card">
-                    <h3>Pharmakon: The Dual Nature of Healing, Harming, and the Future of AI</h3>
-                </div>
-                <div class="content-card">
-                    <h3>Any sufficiently advanced technology is indistinguishable from life: Planetary Computation</h3>
-                </div>
-            </div>
-        </div>
-
-        <!-- ARTICLES - SCIENCE & COSMOS -->
-        <div class="section">
-            <div class="section-header">
-                <h2>🌌 Articles: Science & Cosmos</h2>
-                <p>Exploring the universe, quantum mechanics, and fundamental physics</p>
-            </div>
-            <div class="content-grid">
-                <div class="content-card">
-                    <h3>The Cosmic Origins and Terrestrial Abundance of Water</h3>
-                </div>
-                <div class="content-card">
-                    <h3>The Goldilocks Universe: Why Is Everything "Just Right"</h3>
-                </div>
-                <div class="content-card">
-                    <h3>Cosmic Chronicles: The Story of a Star</h3>
-                </div>
-                <div class="content-card">
-                    <h3>Quantum Computing: Fundamentals and Applications</h3>
-                </div>
-                <div class="content-card">
-                    <h3>The Accelerated Ascent of Humankind</h3>
-                </div>
-                <div class="content-card">
-                    <h3>Turing Test: Temporal Paradox Analysis</h3>
-                </div>
-            </div>
-        </div>
-
-        <!-- ARTICLES - CULTURE & HISTORY -->
-        <div class="section">
-            <div class="section-header">
-                <h2>🎨 Articles: Culture, History & Arts</h2>
-                <p>Deep dives into cultural phenomena and historical mysteries</p>
-            </div>
-            <div class="content-grid">
-                <div class="content-card">
-                    <h3>Marchesa Luisa Casati - The Divine Marquise</h3>
-                </div>
-                <div class="content-card">
-                    <h3>The Venetian Genesis: How La Serenissima Invented the Modern Patent System</h3>
-                </div>
-                <div class="content-card">
-                    <h3>Ghost on the Water: The Mary Celeste Enigma</h3>
-                </div>
-                <div class="content-card">
-                    <h3>Beethoven's Fifth Symphony: The Inadvertent Prophecy of European Destiny</h3>
-                </div>
-                <div class="content-card">
-                    <h3>Harmonia et Geometria: Mathematical and Geometric Foundations of Musical Structure</h3>
-                </div>
-                <div class="content-card">
-                    <h3>From Clay Blobs to Keyboards: The Amazing Story of How We Learned to Write</h3>
-                </div>
-            </div>
-        </div>
-
-        <!-- ARTICLES - SPECIALIZED TOPICS -->
-        <div class="section">
-            <div class="section-header">
-                <h2>🔬 Articles: Specialized Research</h2>
-                <p>In-depth analysis of niche topics and phenomena</p>
-            </div>
-            <div class="content-grid">
-                <div class="content-card">
-                    <h3>The Neurobiological Impact of Caffeine: A Comparative Analysis of Green Tea and Espresso Consumption</h3>
-                </div>
-                <div class="content-card">
-                    <h3>The Faustian Bargain of Mathematics - II</h3>
-                </div>
-                <div class="content-card">
-                    <h3>Basque Cheesecake with Molten Dark Belgian Chocolate</h3>
-                </div>
-            </div>
-        </div>
-
-        <!-- MOVIES SECTION -->
-        <div class="movies-section">
-            <h2>🎬 Films in Production</h2>
-            <div class="movie-item">🎥 Mary Celeste</div>
-            <div class="movie-item">👑 The Divine Marquise</div>
-        </div>
-
-        <!-- REJECTIONS SECTION -->
-        <div class="rejections-section">
-            <h2>📋 Conference Submissions</h2>
-            <div class="rejection-item">AI - Governance and Control<br><small>(San Diego CA, 2025)</small></div>
-        </div>
-
-        <footer>
-            <h2>Connect With Us</h2>
-            <div class="contact-info">
-                📧 <a href="mailto:OurMaryCeleste@gmail.com">OurMaryCeleste@gmail.com</a>
-            </div>
-            <p style="margin-top: 30px; opacity: 0.7;">© 2026 Mary Celeste LLC</p>
-        </footer>
     </div>
+</section>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Create animated stars
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 100; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 3 + 's';
-            starsContainer.appendChild(star);
-        }
+<!-- BOOKS -->
+<section id="books" class="bg-cream">
+    <div class="section-wrap">
+        <div class="section-head">
+            <h2>The <em>Collection</em></h2>
+            <span class="section-tag">Books &amp; Publications</span>
+        </div>
+        <div class="book-list">
 
-        // Add parallax effect
-        document.addEventListener('mousemove', (e) => {
-            const cards = document.querySelectorAll('.content-card');
+            <a href="https://www.amazon.com/Stones-Remember-Guggenheim-Casati-Burned/dp/B0GSQDBVH8/ref=tmm_pap_swatch_0" class="book-row" target="_blank">
+                <div class="book-num">I</div>
+                <div>
+                    <div class="book-genre-tag">Historical Fiction &nbsp;·&nbsp; Venice</div>
+                    <div class="book-title">The Stones Remember: <em>Peggy Guggenheim, Luisa Casati, and the Poet Who Burned the World</em></div>
+                    <div class="book-desc">Three extraordinary lives converge in La Serenissima — told in alternating first-person voices against the stones that witnessed everything.</div>
+                </div>
+                <div class="book-arrow">→</div>
+            </a>
+
+            <a href="https://www.amazon.com/dp/B0GV42WMXW" class="book-row" target="_blank">
+                <div class="book-num">II</div>
+                <div>
+                    <div class="book-genre-tag">Narrative Nonfiction</div>
+                    <div class="book-title">Rooms Where History Broke</div>
+                    <div class="book-desc">Fifteen stories of the rooms where the world pivoted — the Cabinet of Mirrors, the war room, the hospital ward. Nothing was ever the same again.</div>
+                </div>
+                <div class="book-arrow">→</div>
+            </a>
+
+            <a href="https://www.amazon.com/Bound-Vision-Passionate-Partnerships-Invented/dp/B0GLYZ68R5/" class="book-row" target="_blank">
+                <div class="book-num">III</div>
+                <div>
+                    <div class="book-genre-tag">Narrative Nonfiction</div>
+                    <div class="book-title">Bound by Vision: <em>The Passionate Partnerships That Invented the Modern World</em></div>
+                    <div class="book-desc">From Watson &amp; Crick to Lennon &amp; McCartney — a portrait of what two minds, fully aligned, can make possible.</div>
+                </div>
+                <div class="book-arrow">→</div>
+            </a>
+
+            <a href="https://www.amazon.com/Artificial-Intelligence-AI-Our-Daily/dp/B0DPJXHM69" class="book-row" target="_blank">
+                <div class="book-num">IV</div>
+                <div>
+                    <div class="book-genre-tag">Technology &amp; Society</div>
+                    <div class="book-title">AI in Our Daily Lives</div>
+                    <div class="book-desc">A lucid, compelling look at how artificial intelligence is quietly reshaping every dimension of modern existence — from how we work to how we love.</div>
+                </div>
+                <div class="book-arrow">→</div>
+            </a>
+
+            <a href="https://www.amazon.com/DNA-Scaffolding-Artificial-Intelligence-AI/dp/B0DPKKBYBX" class="book-row" target="_blank">
+                <div class="book-num">V</div>
+                <div>
+                    <div class="book-genre-tag">Science &amp; Technology</div>
+                    <div class="book-title">DNA — A Scaffolding for AI</div>
+                    <div class="book-desc">What does biology have to teach artificial intelligence? An illuminating exploration of the deep structural parallels between life and mind.</div>
+                </div>
+                <div class="book-arrow">→</div>
+            </a>
+
+            <a href="https://www.amazon.com/dp/B0GDY6XCVX?ref=yb_qv_ov_prnt_dp_rw" class="book-row" target="_blank">
+                <div class="book-num">VI</div>
+                <div>
+                    <div class="book-genre-tag">Fiction &amp; Short Stories</div>
+                    <div class="book-title">Whispers of the Unseen <em>and Other Tales</em></div>
+                    <div class="book-desc">Stories that live at the edge of perception — where the mysterious presses quietly against the ordinary surface of things.</div>
+                </div>
+                <div class="book-arrow">→</div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- PODCASTS -->
+<section id="podcasts" class="bg-navy">
+    <div class="section-wrap">
+        <div class="section-head">
+            <h2>Podcast <em>Series</em></h2>
+            <span class="section-tag">Audio &amp; Video</span>
+        </div>
+        <div class="podcast-grid">
+
+            <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2mqiUFyDbkkK-O6eR1TqWmz" class="podcast-card" target="_blank">
+                <div class="podcast-label">Series &nbsp;·&nbsp; New</div>
+                <div class="podcast-title">Rooms Where History Broke</div>
+                <div class="podcast-desc">The podcast companion to the book — immersive episodes exploring the spaces where history pivoted.</div>
+                <div class="podcast-watch">Watch Series →</div>
+            </a>
+
+            <div class="podcast-card">
+                <div class="podcast-label">Series &nbsp;·&nbsp; 5 Languages</div>
+                <div class="podcast-title">Artificial Intelligence in Our Daily Lives</div>
+                <div class="podcast-desc">Ten comprehensive episodes on AI's transformation of human existence. Available in five languages.</div>
+                <div class="lang-badges">
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2nla20Cx_YhowfaPPhDapFE" class="lang-badge" target="_blank">🇬🇧 English</a>
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2kifI2VtTCvmSEnjyNM_tLl" class="lang-badge" target="_blank">🇪🇸 Español</a>
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2nX3w49NEy72_aCDbAFB-LT" class="lang-badge" target="_blank">🇫🇷 Français</a>
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2nxlWgZIuleAza_b7vJXhCe" class="lang-badge" target="_blank">🇩🇪 Deutsch</a>
+                    <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2niighUsBNfd7rAMYqbHSwE" class="lang-badge" target="_blank">🇮🇹 Italiano</a>
+                </div>
+            </div>
+
+            <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2mg8OZj_80UXOxqejIo13T_" class="podcast-card" target="_blank">
+                <div class="podcast-label">Series</div>
+                <div class="podcast-title">The Divine Marquise Luisa Casati</div>
+                <div class="podcast-desc">A fascinating exploration of one of history's most enigmatic and extravagant figures.</div>
+                <div class="podcast-watch">Listen Now →</div>
+            </a>
+
+            <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2n1Wn6uFb-K7nezGOs3JoWm" class="podcast-card" target="_blank">
+                <div class="podcast-label">Series &nbsp;·&nbsp; Science</div>
+                <div class="podcast-title">MATERIALS: The Spectacular Science of Stuff</div>
+                <div class="podcast-desc">A captivating journey into the science behind the materials that shape our world and everyday lives.</div>
+                <div class="podcast-watch">Watch Series →</div>
+            </a>
+
+            <a href="https://www.youtube.com/playlist?list=PLki51ntTTQ2kuJvR5hsUrGxEGiM4M2ZLE" class="podcast-card" target="_blank">
+                <div class="podcast-label">Series</div>
+                <div class="podcast-title">Bound by Vision</div>
+                <div class="podcast-desc">The transformative partnerships and collaborations that invented the modern world.</div>
+                <div class="podcast-watch">Watch Series →</div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- FEATURED EPISODES -->
+<section class="bg-navy-d">
+    <div class="section-wrap" style="padding-top: 0;">
+        <div class="section-head" style="margin-top:0; padding-top: 40px;">
+            <h2>Featured <em>Episodes</em></h2>
+            <span class="section-tag">Standalone</span>
+        </div>
+        <div class="episodes-grid">
+            <a href="https://youtu.be/_fwVZSDqSIE" class="episode-card" target="_blank"><span class="episode-icon">🌅</span><div class="episode-title">AI — Crack of Dawn</div></a>
+            <a href="https://youtu.be/-nmia1KlldM" class="episode-card" target="_blank"><span class="episode-icon">🌌</span><div class="episode-title">The Ultimate Fate of the Universe</div></a>
+            <a href="https://youtu.be/i-usiA9-UR8" class="episode-card" target="_blank"><span class="episode-icon">🗣️</span><div class="episode-title">The World's Oldest Languages</div></a>
+            <a href="https://youtu.be/Kd6vANE_uv4" class="episode-card" target="_blank"><span class="episode-icon">⚛️</span><div class="episode-title">Quantum Entanglement</div></a>
+            <a href="https://youtu.be/NEpwCst_WIo" class="episode-card" target="_blank"><span class="episode-icon">💻</span><div class="episode-title">Quantum Computing</div></a>
+            <a href="https://youtu.be/BI55_2-Yo34" class="episode-card" target="_blank"><span class="episode-icon">🎯</span><div class="episode-title">Fine Tuning of the Universe for Life</div></a>
+            <a href="https://youtu.be/-ZtquYitXj4" class="episode-card" target="_blank"><span class="episode-icon">⭐</span><div class="episode-title">Cosmic Chronicles: The Story of a Star</div></a>
+            <a href="https://youtu.be/mmwB0Y8Vb8E" class="episode-card" target="_blank"><span class="episode-icon">🌍</span><div class="episode-title">Advanced Technology &amp; Planetary Computation</div></a>
+            <a href="https://youtu.be/NvixR4VwgQo" class="episode-card" target="_blank"><span class="episode-icon">🎵</span><div class="episode-title">Beethoven's Fifth: European Destiny</div></a>
+            <a href="https://youtu.be/8iqLUxuxzdM" class="episode-card" target="_blank"><span class="episode-icon">🎼</span><div class="episode-title">Beethoven's Fifth: Destiny, Victory &amp; Peace</div></a>
+            <a href="https://youtu.be/qtQ7vx14GoQ" class="episode-card" target="_blank"><span class="episode-icon">🎶</span><div class="episode-title">The Geometry of Music</div></a>
+            <a href="https://youtu.be/y9ymfXxTA58" class="episode-card" target="_blank"><span class="episode-icon">📚</span><div class="episode-title">The Dark Truth of Brothers Grimm Fairy Tales</div></a>
+        </div>
+    </div>
+</section>
+
+<!-- ARTICLES -->
+<section id="articles" class="bg-parch">
+    <div class="section-wrap">
+        <div class="section-head">
+            <h2>Articles &amp; <em>Writing</em></h2>
+            <span class="section-tag">Essays &amp; Research</span>
+        </div>
+        <div class="articles-grid">
+
+            <div class="article-category">
+                <div class="article-cat-title">AI &amp; Technology</div>
+                <ul class="article-list">
+                    <li>The Evolution and Adaptation of the Dining Experience in the Age of AI</li>
+                    <li>AI — Governance and Control</li>
+                    <li>Algorithmic Intimacy: Romantic Connection in the Age of AI</li>
+                    <li>Domestic Automation: The Reconceptualization of Household Labor</li>
+                    <li>Pharmakon: The Dual Nature of Healing, Harming, and the Future of AI</li>
+                    <li>Any Sufficiently Advanced Technology is Indistinguishable from Life: Planetary Computation</li>
+                    <li>The Evolution of Post-Dinner Leisure in American Life</li>
+                </ul>
+            </div>
+
+            <div class="article-category">
+                <div class="article-cat-title">Science &amp; Cosmos</div>
+                <ul class="article-list">
+                    <li>The Cosmic Origins and Terrestrial Abundance of Water</li>
+                    <li>The Goldilocks Universe: Why Is Everything "Just Right"</li>
+                    <li>Cosmic Chronicles: The Story of a Star</li>
+                    <li>Quantum Computing: Fundamentals and Applications</li>
+                    <li>The Accelerated Ascent of Humankind</li>
+                    <li>Turing Test: Temporal Paradox Analysis</li>
+                </ul>
+            </div>
+
+            <div class="article-category">
+                <div class="article-cat-title">Culture, History &amp; Arts</div>
+                <ul class="article-list">
+                    <li>Marchesa Luisa Casati — The Divine Marquise</li>
+                    <li>The Venetian Genesis: How La Serenissima Invented the Modern Patent System</li>
+                    <li>Ghost on the Water: The Mary Celeste Enigma</li>
+                    <li>Beethoven's Fifth Symphony: The Inadvertent Prophecy of European Destiny</li>
+                    <li>Harmonia et Geometria: Mathematical and Geometric Foundations of Musical Structure</li>
+                    <li>From Clay Blobs to Keyboards: The Amazing Story of How We Learned to Write</li>
+                    <li>The Neurobiological Impact of Caffeine: Green Tea and Espresso</li>
+                    <li>Basque Cheesecake with Molten Dark Belgian Chocolate</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FILMS -->
+<section id="films" class="bg-navy">
+    <div class="section-wrap">
+        <div class="section-head">
+            <h2>Films in <em>Production</em></h2>
+            <span class="section-tag">Cinema</span>
+        </div>
+        <div class="films-row">
+            <div class="film-card">
+                <div class="film-icon">🎬</div>
+                <div>
+                    <div class="film-label">In Production</div>
+                    <div class="film-title">Mary Celeste</div>
+                </div>
+            </div>
+            <div class="film-card">
+                <div class="film-icon">👑</div>
+                <div>
+                    <div class="film-label">In Production</div>
+                    <div class="film-title">The Divine Marquise</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TALKS -->
+<section id="talks" class="bg-white">
+    <div class="section-wrap">
+        <div class="section-head">
+            <h2>Talks &amp; <em>Presentations</em></h2>
+            <span class="section-tag">Live &amp; Recorded</span>
+        </div>
+        <div class="talks-grid">
+            <a href="https://youtu.be/cryBZMBSe9w" class="talk-card" target="_blank">
+                <div class="talk-num">01</div>
+                <div class="talk-title">Artificial Intelligence with a Magic Show</div>
+                <div class="talk-link">Watch Talk →</div>
+            </a>
+            <a href="https://youtu.be/ZbY-e3WvefU" class="talk-card" target="_blank">
+                <div class="talk-num">02</div>
+                <div class="talk-title">DNA — A Scaffolding for AI</div>
+                <div class="talk-link">Watch Talk →</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="bg-parch">
+    <div class="section-wrap">
+        <div class="section-head">
+            <h2>About <em>Us</em></h2>
+            <span class="section-tag">Mary Celeste</span>
+        </div>
+        <div class="about-grid">
+            <div>
+                <img src="https://i.imgur.com/GqeZ2yz.png" alt="Madelena Kishner and Riccardo Di Capua" class="about-img">
+            </div>
+            <div class="about-text">
+                <h2>We explore the <em>intersections</em> that matter most.</h2>
+                <p>We explore the fascinating intersections of technology, science, art, and human experience through various media including talks, podcasts, articles, and films.</p>
+                <p>Our work spans narrative nonfiction, historical fiction, and educational science — united by rigorous research, irresistible prose, and a passion for stories that illuminate how the world became what it is.</p>
+                <div class="founders">
+                    <div>
+                        <div class="founder-name">Madelena Kishner</div>
+                        <div class="founder-role">Author &nbsp;·&nbsp; Creator</div>
+                    </div>
+                    <div>
+                        <div class="founder-name">Riccardo Di Capua</div>
+                        <div class="founder-role">Author &nbsp;·&nbsp; Creator</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            ⚓ &nbsp;Mary Celeste
+            <span>Stories Worth Keeping</span>
+        </div>
+        <div class="footer-email">
+            <a href="mailto:OurMaryCeleste@gmail.com">OurMaryCeleste@gmail.com</a>
+        </div>
+        <div class="footer-copy">
+            © 2026 Mary Celeste LLC<br>All rights reserved
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
